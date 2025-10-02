@@ -1,3 +1,6 @@
+import Image from "next/image";
+import delete_icon from '../../../public/logos/delete.svg'
+
 export default function ModalBag({data, open}){
     if (!open) return null;
     
@@ -43,9 +46,15 @@ export default function ModalBag({data, open}){
                         <li key={index} className="flex bg-light my-2 rounded-sm">
 
                             <div className="m-2 flex">
+                                {/* TODO: ADICIONAR IMAGEM DOS ITENS*/}
                                 <div className="h-15 w-15 mx-2 bg-light-gray self-center">
-
+                                    <div className="absolute -mt-1 -ml-2 w-5 h-5 bg-dark-gray rounded-full content-center">
+                                        <p className="flex justify-center font-bold font-noto text-light text-xs">
+                                            {item.quantity}
+                                        </p>
+                                    </div>
                                 </div>
+
                                 <div className="font-noto text-dark-gray text-sm">
                                     <p>{item.name}</p>
                                     <p className="text-xs font-bold">{item.size}/{item.color}</p>
@@ -58,6 +67,10 @@ export default function ModalBag({data, open}){
                                     </div>
 
                                 </div>
+
+                                <button className="cursor-pointer flex ml-20 text-dark-gray">
+                                    <Image src={delete_icon} alt=""></Image>
+                                </button>
                             </div>
                         </li>
                     ))}

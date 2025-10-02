@@ -18,6 +18,7 @@ const bagItems = [
         name: "Camisa Tech Feminina",
         size: "GG",
         color: "Preto",
+        quantity: 1,
         price: 890.50,
         has_descount: false,
         descount_price: 712.00
@@ -26,6 +27,7 @@ const bagItems = [
         name: "Camisa Tech Feminina",
         size: "G",
         color: "Preto",
+        quantity: 2,
         price: 890.00,
         has_descount: true,
         descount_price: 712.00
