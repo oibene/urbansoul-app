@@ -9,6 +9,7 @@ import account from '../../../public/logos/account_circle.svg'
 
 import ModalAccount from '../components/modalAccount'
 import ModalBag from '../components/modalBag'
+import ModalLogin from '../components/modalLogin'
 
 
 {/* TODO: PUXAR DADOS DO BANCO DE DADOS */}
@@ -32,15 +33,21 @@ const bagItems = [
     
 ]
 
-const accountInfo = {
-    acc_name: "Icaro O",
-    acc_email: "icaro@email.com"
-}
+const accountInfo = null;
+//{
+//    acc_name: "Icaro O",
+//    acc_email: "icaro@email.com"
+//}
 
 export default function Header(){
     const [openAcc, setOpenAcc] = useState(false);
+    const [openLogin, setOpenLogin] = useState(false);
+
     const handleModalAcc = () => {
-        setOpenAcc(!openAcc);
+        if (accountInfo != null)
+            setOpenAcc(!openAcc);
+        else
+            setOpenLogin(!openLogin);
     }
 
     const [openBag, setOpenBag] = useState(false);
@@ -60,7 +67,6 @@ export default function Header(){
             </div>
         )
     }
-
 
     {/* TODO: CLICK OUTSIDE BUTTON AREA */}
 
@@ -108,6 +114,10 @@ export default function Header(){
         <div className="flex justify-end">
             { openBag && <ModalBag data={bagItems} open={openBag}></ModalBag> }
             { openAcc && <ModalAccount open={openAcc} data={accountInfo}></ModalAccount> }
+        </div>
+
+        <div className="flex justify-center">
+            { openLogin && <ModalLogin></ModalLogin>}
         </div>
     </div>
     )

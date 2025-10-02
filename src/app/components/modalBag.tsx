@@ -28,7 +28,7 @@ export default function ModalBag({data, open}){
     };
 
     return(
-        <div className="absolute w-100 h-140 bg-light-gray font-noto">
+        <div className="absolute w-100 h-140 bg-light-gray font-noto outline-1 outline-dark-gray mt-2 mr-2 rounded-sm">
 
             <div className="w-full h-15 bg-light content-center row-end-1">
                 <div className="flex mx-4 font-bold text-dark-gray text-base justify-between">
