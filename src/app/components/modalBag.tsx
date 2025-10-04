@@ -9,19 +9,24 @@ export default function ModalBag({data, open}){
 
     // soma valores totais sem se preocupar com descontos
     const subtotal = data.map(item => 
-        item.price).reduce(
+        item.price * item.quantity).reduce(
             (total, current) => total + current, 0
         );
 
     // soma apenas descontos, se nao possui, soma 0
     const descounts = data.map(item => 
-        (item.has_descount ? (item.price - item.descount_price): 0)).reduce(
+        (item.has_descount ? (item.price - item.descount_price) : 0) * item.quantity ).reduce(
             (total, current) => total + current, 0
         );
 
     // se possui descontos, ele soma o valor do desconto, se não, soma valor inteiro
     const total = data.map(item =>
-        (item.has_descount ? item.descount_price : item.price)).reduce(
+        (item.has_descount ? item.descount_price : item.price) * item.quantity ).reduce(
+            (total, current) => total + current, 0
+        );
+
+    const itemsCount = data.map(item => 
+        item.quantity).reduce(
             (total, current) => total + current, 0
         );
 
@@ -80,29 +85,40 @@ export default function ModalBag({data, open}){
             </div>
 
             <div className="w-full h-50 bg-light content-center">
-                <div className="font-noto text-dark-gray text-sm font-bold">
-                    
-                    <div className="flex justify-between mx-5">
+                <div className="font-noto text-dark-gray text-sm font-bold mx-4">
+
+                    <div className="flex my-1 justify-between">
+                        <hr className="my-1 w-1/3"/>
+
+                        <p className="text-xs">
+                            {itemsCount} Itens
+                        </p>
+
+                        <hr className="my-1 w-1/3"/>
+
+                    </div>
+
+                    <div className="flex justify-between">
                         <p>Subtotal</p>
                         <p>{formatMoney(subtotal)}</p>
                     </div>
-                    <hr className="my-1 mx-4"/>
+                    <hr className="my-1"/>
                     
-                    <div className="flex justify-between mx-5">
+                    <div className="flex justify-between">
                         <p>Cupons</p>
                         <button className="cursor-pointer underline underline-offset-2">
                             {cupom.cupom_name != "" ? cupom.cupom_name : "adicionar"}
                         </button>
                     </div>
-                    <hr className="my-1 mx-4"/>
+                    <hr className="my-1"/>
 
-                    <div className="flex justify-between mx-5">
+                    <div className="flex justify-between">
                         <p>Descontos</p>
                         <p>{formatMoney(descounts)}</p>
                     </div>
-                    <hr className="my-1 mx-4"/>
+                    <hr className="my-1"/>
 
-                    <div className="flex justify-between mx-5">
+                    <div className="flex justify-between">
                         <p>Total</p>
                         <p>{formatMoney(total)}</p>
                     </div>
