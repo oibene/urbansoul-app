@@ -1,4 +1,3 @@
-import type React from "react";
 import type { AccountInterface } from "../utils/accountInterface";
 
 const person = "/logos/person.svg?url"
@@ -8,7 +7,7 @@ interface ModalAccProps {
     open: boolean;
 }
 
-const ModalAccount:React.FC<ModalAccProps> = (data) => {
+export default function ModalAccount(data:ModalAccProps){
     if (!open) return null;
 
     return(
@@ -45,5 +44,3 @@ const ModalAccount:React.FC<ModalAccProps> = (data) => {
         </div>
     )
 }
-
-export default ModalAccount;

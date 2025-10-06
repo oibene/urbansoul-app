@@ -1,13 +1,14 @@
 'use client'
 import { useState } from "react";
+import type { CarouselInterface } from "../utils/carouselInterface";
 
-interface CarrosselProps {
-    items: any[];
+interface CarouselProps {
+    items: CarouselInterface[];
     theme: string;
     itemsPerView: number;
 }
 
-const Carousel:React.FC<CarrosselProps> = (data) => {
+export default function Carousel(data: CarouselProps) {
 
     var [currentIndex, setCurrentIndex] = useState(0);
 
@@ -52,7 +53,7 @@ const Carousel:React.FC<CarrosselProps> = (data) => {
 
             <div className="flex justify-center">
 
-                {data.items.map((index:number) => (
+                {data.items.map((item, index) => (
                     <button key={index} onClick={() => setCurrentIndex(index)}
                             className={index === currentIndex ? "h-3 w-3 mx-1 outline rounded-full bg-dark-gray cursor-pointer" :
                                                                 "h-3 w-3 mx-1 outline rounded-full cursor-pointer"}>
@@ -63,5 +64,3 @@ const Carousel:React.FC<CarrosselProps> = (data) => {
         </div>
     )
 }
-
-export default Carousel;

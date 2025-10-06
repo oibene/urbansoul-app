@@ -6,7 +6,7 @@ interface ModalBagProps {
     open: boolean;
 }
 
-const ModalBag:React.FC<ModalBagProps> = (data) => {
+export default function ModalBag(data: ModalBagProps) {
     if (!data.open) return null;
     
     // TODO: INSERIR MODAL PARA INSERÇÃO DE CUPOM
@@ -140,5 +140,3 @@ const ModalBag:React.FC<ModalBagProps> = (data) => {
         </div>
     )
 }
-
-export default ModalBag;

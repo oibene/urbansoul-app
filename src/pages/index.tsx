@@ -1,4 +1,5 @@
 import Carousel from "../components/carousel"
+import type { CarouselInterface } from "../utils/carouselInterface"
 
 const banner_img = '/images/banner.svg'
 const truck = '/logos/delivery_truck_speed.svg'
@@ -7,7 +8,7 @@ const savings = '/logos/savings.svg'
 
 {/* IMAGES CARROSSEL */}
 
-const images_fem = [
+const images_fem: CarouselInterface[] = [
     {img_URL: '/images/category0.svg', category: "CAMISA SIMPLES", type: "Camisas"},
     {img_URL: '/images/category1.svg', category: "MANGA LONGA", type: "Novidades"},
     {img_URL: '/images/category2.svg', category: "MOLETOM", type: "Conforto"},
