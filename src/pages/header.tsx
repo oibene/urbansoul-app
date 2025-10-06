@@ -1,9 +1,11 @@
 'use client'
 import { useState } from 'react'
+import type { ItemsInterface } from '../utils/itemsInterface'
 
 import ModalAccount from '../components/modalAccount'
 import ModalBag from '../components/modalBag'
 import ModalLogin from '../components/modalLogin'
+import type { AccountInterface } from '../utils/accountInterface'
 
 const logo = '/logos/logo.svg'
 const search_svg = '/logos/search.svg'
@@ -11,8 +13,10 @@ const bag = '/logos/shopping_bag.svg'
 const account = '/logos/account_circle.svg'
 
 {/* TODO: PUXAR DADOS DO BANCO DE DADOS */}
-const bagItems = [
+
+const bagItems: ItemsInterface[] = [
     {
+        id: 1,
         name: "Camisa Tech Feminina",
         size: "GG",
         color: "Preto",
@@ -22,6 +26,7 @@ const bagItems = [
         descount_price: 712.00
     },
     {
+        id: 2,
         name: "Camisa Tech Feminina",
         size: "G",
         color: "Preto",
@@ -30,14 +35,15 @@ const bagItems = [
         has_descount: true,
         descount_price: 712.00
     },
-    
 ]
 
-const accountInfo = null;
-//{
-//    acc_name: "Icaro O",
-//    acc_email: "icaro@email.com"
-//}
+const accountInfo: AccountInterface =
+{
+    id: 1,
+    first_name: "Icaro",
+    last_name: "O",
+    email: "icaro@email.com"
+}
 
 export default function Header(){
     const [openAcc, setOpenAcc] = useState(false);
@@ -45,7 +51,7 @@ export default function Header(){
 
     const [search, setSearch] = useState("");
     
-    const keydown = (event) => {
+    const keydown = (event: { key: string }) => {
         if (event.key = 'Enter') {
             console.log('do validate')
         }
@@ -124,8 +130,8 @@ export default function Header(){
         </div>
 
         <div className="flex justify-end">
-            { openBag && <ModalBag data={bagItems} open={openBag}></ModalBag> }
-            { openAcc && <ModalAccount open={openAcc} data={accountInfo}></ModalAccount> }
+            { openBag && <ModalBag itens={bagItems} open={openBag} /> }
+            { openAcc && <ModalAccount account={accountInfo} open={openAcc} /> }
         </div>
 
         <div className="flex justify-center">

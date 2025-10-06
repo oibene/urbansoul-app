@@ -64,7 +64,7 @@ export default function Index(){
             </div>
 
             {/* CATEGORIAS*/}
-            <Carousel data={images_fem} theme="FEMININAS" itemsPerView={4}></Carousel>
+            <Carousel items={images_fem} theme="FEMININAS" itemsPerView={4}></Carousel>
 
         </div>
     )

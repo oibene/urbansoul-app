@@ -1,32 +1,38 @@
+import type { ItemsInterface } from "../utils/itemsInterface";
 const delete_icon = '/logos/delete.svg'
 
-export default function ModalBag({data, open}){
-    if (!open) return null;
+interface ModalBagProps {
+    itens:ItemsInterface[];
+    open: boolean;
+}
+
+const ModalBag:React.FC<ModalBagProps> = (data) => {
+    if (!data.open) return null;
     
     // TODO: INSERIR MODAL PARA INSERÇÃO DE CUPOM
     const cupom = {cupom_name: "CUPOM10", cupom_value: 0.1}
-
+ 
     // soma valores totais sem se preocupar com descontos
-    const subtotal = data.map(item => 
+    const subtotal = data.itens.map(item => 
         item.price * item.quantity).reduce(
-            (total, current) => total + current, 0
+            (total: number, current: number) => total + current, 0
         );
 
     // soma apenas descontos, se nao possui, soma 0
-    const descounts = data.map(item => 
+    const descounts = data.itens.map(item => 
         (item.has_descount ? (item.price - item.descount_price) : 0) * item.quantity ).reduce(
-            (total, current) => total + current, 0
+            (total: number, current: number) => total + current, 0
         );
 
     // se possui descontos, ele soma o valor do desconto, se não, soma valor inteiro
-    const total = data.map(item =>
+    const total = data.itens.map(item =>
         (item.has_descount ? item.descount_price : item.price) * item.quantity ).reduce(
-            (total, current) => total + current, 0
+            (total: number, current: number) => total + current, 0
         );
 
-    const itemsCount = data.map(item => 
+    const itemsCount = data.itens.map(item => 
         item.quantity).reduce(
-            (total, current) => total + current, 0
+            (total: number, current: number) => total + current, 0
         );
 
     const formatMoney = (amount: number) => {
@@ -46,8 +52,8 @@ export default function ModalBag({data, open}){
 
             <div>
                 <ul className="m-5 h-65 overflow-y-auto">
-                    {data.map((item, index) => (
-                        <li key={index} className="flex bg-light my-2 rounded-sm">
+                    {data.itens.map((item, index) => (
+                        <li key={index} className="flex bg-light my-2 rounded-+sm">
 
                             <div className="m-2 flex">
                                 {/* TODO: ADICIONAR IMAGEM DOS ITENS*/}
@@ -134,3 +140,5 @@ export default function ModalBag({data, open}){
         </div>
     )
 }
+
+export default ModalBag;

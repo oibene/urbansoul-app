@@ -1,6 +1,14 @@
+import type React from "react";
+import type { AccountInterface } from "../utils/accountInterface";
+
 const person = "/logos/person.svg?url"
 
-export default function ModalAccount({open, data}){
+interface ModalAccProps {
+    account:AccountInterface;
+    open: boolean;
+}
+
+const ModalAccount:React.FC<ModalAccProps> = (data) => {
     if (!open) return null;
 
     return(
@@ -15,8 +23,8 @@ export default function ModalAccount({open, data}){
                             <img src={person} alt="" />
                         </div>
                         <div className="ml-3 text-xs content-center">
-                            <p>{data.acc_name}</p>
-                            <p className="font-normal">{data.acc_email}</p>
+                            <p>{data.account.first_name + " " + data.account.last_name}</p>
+                            <p className="font-normal">{data.account.email}</p>
                         </div>
                     </div>
                 </div>
@@ -37,3 +45,5 @@ export default function ModalAccount({open, data}){
         </div>
     )
 }
+
+export default ModalAccount;
