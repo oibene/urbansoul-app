@@ -1,6 +1,5 @@
-import type { AccountInterface } from "../utils/accountInterface";
-
-const person = "/logos/person.svg?url"
+import type { AccountInterface } from "../@types/customer";
+const person = "/logos/person.svg"
 
 interface ModalAccProps {
     account:AccountInterface;

@@ -1,11 +1,11 @@
 'use client'
 import { useState } from 'react'
-import type { ItemsInterface } from '../utils/itemsInterface'
+import type { ItemsInterface } from '../@types/products'
+import type { AccountInterface } from '../@types/customer'
 
 import ModalAccount from '../components/modalAccount'
 import ModalBag from '../components/modalBag'
 import ModalLogin from '../components/modalLogin'
-import type { AccountInterface } from '../utils/accountInterface'
 
 const logo = '/logos/logo.svg'
 const search_svg = '/logos/search.svg'
@@ -37,13 +37,13 @@ const bagItems: ItemsInterface[] = [
     },
 ]
 
-const accountInfo: AccountInterface =
-{
-    id: 1,
-    first_name: "Icaro",
-    last_name: "O",
-    email: "icaro@email.com"
-}
+const accountInfo: AccountInterface = {}
+// {
+//     id: 1,
+//     first_name: "Icaro",
+//     last_name: "O",
+//     email: "icaro@email.com"
+// }
 
 export default function Header(){
     const [openAcc, setOpenAcc] = useState(false);
@@ -58,10 +58,10 @@ export default function Header(){
     }
 
     const handleModalAcc = () => {
-        if (accountInfo != null)
-            setOpenAcc(!openAcc);
-        else
+        if (Object.keys(accountInfo).length === 0)
             setOpenLogin(!openLogin);
+        else
+            setOpenAcc(!openAcc);
     }
 
     const [openBag, setOpenBag] = useState(false);

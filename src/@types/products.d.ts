@@ -8,3 +8,9 @@ export interface ItemsInterface {
     has_descount: boolean;
     descount_price: number;
 }
+
+export interface CarouselInterface{
+    img_URL: string;
+    category: string;
+    type: string;
+}

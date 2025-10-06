@@ -1,5 +1,5 @@
 import Carousel from "../components/carousel"
-import type { CarouselInterface } from "../utils/carouselInterface"
+import type { CarouselInterface } from "../@types/products"
 
 const banner_img = '/images/banner.svg'
 const truck = '/logos/delivery_truck_speed.svg'

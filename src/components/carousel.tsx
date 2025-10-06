@@ -1,6 +1,6 @@
 'use client'
 import { useState } from "react";
-import type { CarouselInterface } from "../utils/carouselInterface";
+import type { CarouselInterface } from "../@types/products";
 
 interface CarouselProps {
     items: CarouselInterface[];
