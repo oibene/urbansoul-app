@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Header from "./pages/header"
 import Footer from "./pages/footer"
 import Index from './pages'
-import ProductSearch from './components/filters';
+import ProductSearch from './pages/productSearch';
 
 const router = createBrowserRouter(
   [

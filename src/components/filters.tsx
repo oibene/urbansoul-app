@@ -1,11 +1,13 @@
-import filter_svg from '../../public/logos/discover_tune.svg'
-import arrow_down from '../../public/logos/arrow_down.svg'
-import arrow_up from '../../public/logos/arrow_up.svg'
+import filter_svg from '/logos/discover_tune.svg'
+import arrow_down from '/logos/arrow_down.svg'
+import arrow_up from '/logos/arrow_up.svg'
 
 import { useState } from 'react'
 import type { CategoryInterface } from '../@types/products';
 
 export default function Filters(){
+
+    //#region COLLAPSES
     const [genderCollapse, setGenderCollapse] = useState(true);
     const [categoryCollapse, setCategoryCollapse] = useState(true);
     const [sizeCollapse, setSizeCollapse] = useState(true);
@@ -23,7 +25,9 @@ export default function Filters(){
     const handlePrice = () => {
         setPriceCollapse(!priceCollapse)
     }
+    //#endregion
 
+    //#region STATES
     const [btnPP, setBtnPP] = useState(false);
     const [btnP, setBtnP] = useState(false);
     const [btnM, setBtnM] = useState(false);
@@ -48,13 +52,16 @@ export default function Filters(){
     
     const [minValue, setMinValue] = useState("");
     const [maxValue, setMaxValue] = useState("");
+    //#endregion
 
     {/* TODO: SISTEMA DE FILTROS LEVANDO DADOS PARA FORA DA TELA*/}
-
+    
 
     const checkboxStyle: string = ("appearance-none rounded-sm h-4 w-4 border border-gray" +
                                     " checked:border-2 checked:outline-1 checked:border-light checked:bg-dark-gray");
 
+
+    //#region VALUES
     const category: CategoryInterface[] = [
         {
             id: 1,
@@ -82,6 +89,7 @@ export default function Filters(){
             description: 'Moletom'
         }
     ]
+    //#endregion
 
     enum gender {
         F= 'Feminino',
@@ -97,146 +105,140 @@ export default function Filters(){
     }
 
     return(
-        <div className="flex m-10">
+        <div className="w-75 h-150 mt-5 bg-light rounded-sm">
+            <div className="m-5 font-noto text-dark-gray text-base">
 
-            <div className="w-75 h-150 bg-light rounded-sm">
-                    <div className="m-5 font-noto text-dark-gray text-base">
+                <div className="flex">
+                    <img className="mr-1" src={filter_svg} alt="" />
+                    <p>Filtros</p>
+                </div>
+                <hr className="mt-2 w-full rounded-sm" />
 
-                        <div className="flex">
-                            <img className="mr-1" src={filter_svg} alt="" />
-                            <p>Filtros</p>
-                        </div>
+                <div className="mt-2">
+                    <button className="flex justify-between w-full cursor-pointer outline-none" onClick={handleGender}>
+                        <p>Gênero</p>
+                        <img src={genderCollapse ? arrow_up : arrow_down} alt="" />
+                    </button>
 
-                        <hr className="mt-2 w-full rounded-sm" />
+                    <ul className={genderCollapse ? "text-sm mt-1" : "hidden "}>
+                        <li className="flex mb-1 cursor-pointer">
+                            <input type="checkbox" name="gender" id="M" className={checkboxStyle} />
+                            <p className="ml-2 content-center">{gender.M}</p>
+                        </li>
 
-                        <div className="mt-2">
+                        <li className="flex mb-1 cursor-pointer">
+                            <input type="checkbox" name="gender" id="F" className={checkboxStyle} />
+                            <p className="ml-2 content-center">{gender.F}</p>
+                        </li>
 
-                            <button className="flex justify-between w-full cursor-pointer outline-none" onClick={handleGender}>
-                                <p>Gênero</p>
-                                <img src={genderCollapse ? arrow_up : arrow_down} alt="" />
-                            </button>
+                        <li className="flex mb-1 cursor-pointer">
+                            <input type="checkbox" name="gender" id="U" className={checkboxStyle}/>
+                            <p className="ml-2 content-center">{gender.U}</p>
+                        </li>
+                    </ul>
+                    <hr className={genderCollapse ? "mt-2 w-full rounded-sm  text-gray": "mt-2 w-full rounded-sm"} />
+                </div>
 
-                            <ul className={genderCollapse ? "text-sm mt-1" : "hidden "}>
-                                <li className="flex mb-1 cursor-pointer">
-                                    <input type="checkbox" name="gender" id="M" className={checkboxStyle} />
-                                    <p className="ml-2 content-center">{gender.M}</p>
-                                </li>
+                <div className="mt-2">
 
-                                <li className="flex mb-1 cursor-pointer">
-                                    <input type="checkbox" name="gender" id="F" className={checkboxStyle} />
-                                    <p className="ml-2 content-center">{gender.F}</p>
-                                </li>
+                    <button className="flex justify-between w-full cursor-pointer outline-none" onClick={handleCategory}>
+                        <p>Categoria</p>
+                        <img src={categoryCollapse ? arrow_up : arrow_down} alt="" />
+                    </button>
 
-                                <li className="flex mb-1 cursor-pointer">
-                                    <input type="checkbox" name="gender" id="U" className={checkboxStyle}/>
-                                    <p className="ml-2 content-center">{gender.U}</p>
-                                </li>
-                            </ul>
-                            <hr className={genderCollapse ? "mt-2 w-full rounded-sm  text-gray": "mt-2 w-full rounded-sm"} />
-                        </div>
+                    <ul className={categoryCollapse ? "text-sm mt-1" : "hidden "}>
+                        {category.map((item:any, index:number) =>(
+                            <li key={index} className="flex mb-1 cursor-pointer">
+                                <input type="checkbox" name="gender" id={item.type} className={checkboxStyle}/>
+                                <p className="ml-2 content-center">{item.description}</p>
+                            </li>
+                        ))}
+                    </ul>
+                    <hr className={categoryCollapse ? "mt-2 w-full rounded-sm  text-gray": "mt-2 w-full rounded-sm"} />
+                </div>
                         
 
-                        <div className="mt-2">
+                <div className="mt-2">
+                    <button className="flex justify-between w-full cursor-pointer outline-none" onClick={handleSize}>
+                        <p>Tamanho</p>
+                        <img src={sizeCollapse ? arrow_up : arrow_down} alt="" />
+                    </button>
 
-                            <button className="flex justify-between w-full cursor-pointer outline-none" onClick={handleCategory}>
-                                <p>Categoria</p>
-                                <img src={categoryCollapse ? arrow_up : arrow_down} alt="" />
+                    <ul className={sizeCollapse ? "flex text-sm mt-3 mx-2 justify-between font-bold" : "hidden"}>
+
+                        <li className="cursor-pointer">
+                            <button onClick={handleBtnPP}
+                                className={ btnPP? "w-10 h-8 rounded-xl bg-dark-gray text-light" :
+                                    "w-10 h-8 rounded-xl border border-dark-gray" } >
+                                {size.PP}
                             </button>
+                        </li>
 
-                            <ul className={categoryCollapse ? "text-sm mt-1" : "hidden "}>
-                                {category.map((item:any, index:number) =>(
-                                    <li key={index} className="flex mb-1 cursor-pointer">
-                                        <input type="checkbox" name="gender" id={item.type} className={checkboxStyle}/>
-                                        <p className="ml-2 content-center">{item.description}</p>
-                                    </li>
-                                ))}
-                            </ul>
+                        <li className="cursor-pointer">
+                            <button onClick={handleBtnP}
+                                   className={ btnP? "w-10 h-8 rounded-xl bg-dark-gray text-light" :
+                                    "w-10 h-8 rounded-xl border border-dark-gray" } >
+                                {size.P}
+                            </button>
+                        </li>
 
-                            <hr className={categoryCollapse ? "mt-2 w-full rounded-sm  text-gray": "mt-2 w-full rounded-sm"} />
-                        </div>
+                        <li className="cursor-pointer">
+                            <button onClick={handleBtnM}
+                                className={ btnM? "w-10 h-8 rounded-xl bg-dark-gray text-light" :
+                                    "w-10 h-8 rounded-xl border border-dark-gray" } >
+                                {size.M}
+                            </button>
+                        </li>
+
+                        <li className="cursor-pointer">
+                            <button onClick={handleBtnG}
+                                className={ btnG? "w-10 h-8 rounded-xl bg-dark-gray text-light" :
+                                    "w-10 h-8 rounded-xl border border-dark-gray" } >
+                                {size.G}
+                            </button>
+                        </li>
+
+                        <li className="cursor-pointer">
+                            <button onClick={handleBtnGG}
+                                className={ btnGG? "w-10 h-8 rounded-xl bg-dark-gray text-light" :
+                                    "w-10 h-8 rounded-xl border border-dark-gray" } >
+                                {size.GG}
+                            </button>
+                        </li>
+
+                    </ul>
+                    <hr className={sizeCollapse ? "mt-3 w-full rounded-sm  text-gray": "mt-2 w-full rounded-sm"} />
+                </div>
+
+                <div className="mt-2">
+                    <button className="flex justify-between w-full cursor-pointer outline-none" onClick={handlePrice}>
+                        <p>Preço</p>
+                        <img src={priceCollapse ? arrow_up : arrow_down} alt="" />
+                    </button>
+
+                    <ul className={priceCollapse ? "flex text-sm mt-3 mx-2 justify-evenly" : "hidden "}>
+
+                        <p className="content-center">De</p>
+
+                        <li className="outline-1 rounded-xs text-gray h-8 w-1/3 content-center">
+                            <input type="text"className="ml-2 text-base text-dark-gray outline-none"
+                                name="email" placeholder="0" size={8}
+                                onChange={(e) => { setMinValue(e.target.value)}} />
+                        </li>
+
+                        <p className="content-center">Até</p>
+
+                        <li className="outline-1 rounded-xs text-gray h-8 w-1/3 content-center">
+                            <input type="text"className="ml-2 text-base text-dark-gray outline-none"
+                                name="email" placeholder="10.000" size={8}
+                                onChange={(e) => { setMaxValue(e.target.value)}} />
+                        </li>
+
+                    </ul>
+                    <hr className={priceCollapse ? "mt-3 w-full rounded-sm  text-gray": "mt-2 w-full rounded-sm"} />
                         
+                </div>
 
-                        <div className="mt-2">
-                            <button className="flex justify-between w-full cursor-pointer outline-none" onClick={handleSize}>
-                                <p>Tamanho</p>
-                                <img src={sizeCollapse ? arrow_up : arrow_down} alt="" />
-                            </button>
-
-                            <ul className={sizeCollapse ? "flex text-sm mt-3 mx-2 justify-between font-bold" : "hidden"}>
-
-                                <li className="cursor-pointer">
-                                    <button onClick={handleBtnPP}
-                                        className={ btnPP? "w-10 h-8 rounded-xl bg-dark-gray text-light" :
-                                            "w-10 h-8 rounded-xl border border-dark-gray" } >
-                                        {size.PP}
-                                    </button>
-                                </li>
-
-                                <li className="cursor-pointer">
-                                    <button onClick={handleBtnP}
-                                        className={ btnP? "w-10 h-8 rounded-xl bg-dark-gray text-light" :
-                                            "w-10 h-8 rounded-xl border border-dark-gray" } >
-                                        {size.P}
-                                    </button>
-                                </li>
-
-                                <li className="cursor-pointer">
-                                    <button onClick={handleBtnM}
-                                        className={ btnM? "w-10 h-8 rounded-xl bg-dark-gray text-light" :
-                                            "w-10 h-8 rounded-xl border border-dark-gray" } >
-                                        {size.M}
-                                    </button>
-                                </li>
-
-                                <li className="cursor-pointer">
-                                    <button onClick={handleBtnG}
-                                        className={ btnG? "w-10 h-8 rounded-xl bg-dark-gray text-light" :
-                                            "w-10 h-8 rounded-xl border border-dark-gray" } >
-                                        {size.G}
-                                    </button>
-                                </li>
-
-                                <li className="cursor-pointer">
-                                    <button onClick={handleBtnGG}
-                                        className={ btnGG? "w-10 h-8 rounded-xl bg-dark-gray text-light" :
-                                            "w-10 h-8 rounded-xl border border-dark-gray" } >
-                                        {size.GG}
-                                    </button>
-                                </li>
-
-                            </ul>
-                            <hr className={sizeCollapse ? "mt-3 w-full rounded-sm  text-gray": "mt-2 w-full rounded-sm"} />
-                        </div>
-
-                        <div className="mt-2">
-                            <button className="flex justify-between w-full cursor-pointer outline-none" onClick={handlePrice}>
-                                <p>Preço</p>
-                                <img src={priceCollapse ? arrow_up : arrow_down} alt="" />
-                            </button>
-
-                            <ul className={priceCollapse ? "flex text-sm mt-3 mx-2 justify-evenly" : "hidden "}>
-
-                                <p className="content-center">De</p>
-
-                                <li className="outline-1 rounded-xs text-gray h-8 w-1/3 content-center">
-                                    <input type="text"className="ml-2 text-base text-dark-gray outline-none"
-                                        name="email" placeholder="0" size={8}
-                                        onChange={(e) => { setMinValue(e.target.value)}} />
-                                </li>
-
-                                <p className="content-center">Até</p>
-
-                                <li className="outline-1 rounded-xs text-gray h-8 w-1/3 content-center">
-                                    <input type="text"className="ml-2 text-base text-dark-gray outline-none"
-                                        name="email" placeholder="10.000" size={8}
-                                        onChange={(e) => { setMaxValue(e.target.value)}} />
-                                </li>
-
-                            </ul>
-                            <hr className={priceCollapse ? "mt-3 w-full rounded-sm  text-gray": "mt-2 w-full rounded-sm"} />
-                        </div>
-
-                    </div>
             </div>
         </div>
     )

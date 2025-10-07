@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import type { ItemsInterface } from '../@types/products'
+import type { ItemsInterface, ItemsPriceInterface } from '../@types/products'
 import type { AccountInterface } from '../@types/customer'
 
 import ModalAccount from '../components/modalAccount'
@@ -14,7 +14,7 @@ const account = '/logos/account_circle.svg'
 
 {/* TODO: PUXAR DADOS DO BANCO DE DADOS */}
 
-const bagItems: ItemsInterface[] = [
+const bagItems: ItemsPriceInterface[] = [
     {
         id: 1,
         name: "Camisa Tech Feminina",

@@ -1,8 +1,8 @@
-import type { ItemsInterface } from "../@types/products";
+import type { ItemsPriceInterface } from "../@types/products";
 const delete_icon = '/logos/delete.svg'
 
 interface ModalBagProps {
-    itens:ItemsInterface[];
+    itens:ItemsPriceInterface[];
     open: boolean;
 }
 
