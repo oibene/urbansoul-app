@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import type { ItemsInterface } from "../@types/products"
 import Filters from "../components/filters"
 
@@ -45,14 +46,16 @@ export default function ProductSearch() {
     
     //#endregion
 
-    const itemsFiltered:  ItemsInterface[] = items.filter(
-        item => item.category == ""
-    )
+    var itemsFiltered:  ItemsInterface[] = []
+
+    function filterCallback(filter: any) {
+        console.log(filter.gender)
+    }
     
     return(
         <div className="flex m-10">
 
-            <Filters></Filters>
+            <Filters callback={filterCallback}></Filters>
             
             <div className="w-full bg-light ml-10 rounded-sm">
 

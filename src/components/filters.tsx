@@ -6,16 +6,16 @@ import { useState } from 'react'
 import type { CategoryInterface, ItemsFilterInterface } from '../@types/products';
 
 const sendFilters : ItemsFilterInterface = {
-        gender: [],
-        category: [],
-        size: [],
+    gender: [],
+    category: [],
+    size: [],
 
-        min_price: 0,
-        max_price: 0
+    min_price: 0,
+    max_price: 0,
+
 }
 
-
-export default function Filters(){
+export default function Filters(filter: { callback: (arg0: ItemsFilterInterface) => void; }){
 
     //#region COLLAPSES
     const [genderCollapse, setGenderCollapse] = useState(true);
@@ -46,23 +46,31 @@ export default function Filters(){
 
     const handleBtnPP = () => {
         setBtnPP(!btnPP)
-        sendFilters.size.push((btnPP) ? "" : "PP");
+        sendFilters.size[0] = ((btnP) ? "" : "P");
+        filter.callback(sendFilters);
     }
+
     const handleBtnP = () => {
         setBtnP(!btnP)
-        sendFilters.size.push((btnP) ? "" : "P");
+        sendFilters.size[1] = ((btnP) ? "" : "P");
+        filter.callback(sendFilters);
     }
+
     const handleBtnM = () => {
         setBtnM(!btnM)
-        sendFilters.size.push((btnM) ? "" : "M");
+        sendFilters.size[2] = ((btnM) ? "" : "M");
+        filter.callback(sendFilters);
     }
+
     const handleBtnG = () => {
         setBtnG(!btnG)
-        sendFilters.size.push((btnG) ? "" : "G");
+        sendFilters.size[3] = ((btnG) ? "" : "G");
+        filter.callback(sendFilters);
     }
     const handleBtnGG = () => {
         setBtnGG(!btnGG)
-        sendFilters.size.push((btnGG) ? "" : "GG");
+        sendFilters.size[4] = ((btnGG) ? "" : "GG");
+        filter.callback(sendFilters);
     }
     
     const [minValue, setMinValue] = useState(0);
@@ -73,10 +81,12 @@ export default function Filters(){
 
     const handleMinPrice = (value: string) => {
         setMinValue(parseInt(value))
+        filter.callback(sendFilters);
     }
 
     const handleMaxPrice = (value: string) => {
         setMaxValue(parseInt(value))
+        filter.callback(sendFilters);
     }
 
     const handleChecks = () => {
@@ -85,6 +95,8 @@ export default function Filters(){
 
         sendFilters.gender = Array.from(checkboxGender).map(checkbox => (checkbox.checked) ? checkbox.id : "");
         sendFilters.category = Array.from(checkboxCategory).map(checkbox => (checkbox.checked) ? checkbox.id : "");
+
+        filter.callback(sendFilters);
     }
 
     //#endregion
