@@ -4,8 +4,6 @@ import Filters from "../components/filters"
 import img_placeholder from '/images/item_img.svg'
 
 export default function ProductSearch() {
-
-
     const formatMoney = (amount: number) => {
         return amount.toLocaleString('pt-BR',
             {style: 'currency', currency:'BRL'})
@@ -48,7 +46,7 @@ export default function ProductSearch() {
     //#endregion
 
     const itemsFiltered:  ItemsInterface[] = items.filter(
-        item => item.category == "sweater"
+        item => item.category == ""
     )
     
     return(
@@ -65,7 +63,7 @@ export default function ProductSearch() {
                 <div className="grid grid-cols-5 overflow-y-scroll h-170 gap-5 m-5">
                     
                     {itemsFiltered.map((item) => 
-                        <div className="w-60 h-80 bg-bglight rounded-md">
+                        <div key={item.id} className="w-60 h-80 bg-bglight rounded-md">
 
                             <div className="mx-4">
                                 

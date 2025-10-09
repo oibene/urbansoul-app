@@ -70,15 +70,21 @@ export default function Filters(){
 
     sendFilters.min_price = Math.max(0, Math.min(9999, minValue))
     sendFilters.max_price = Math.max(0, Math.min(9999, maxValue))
-    
+
+    const handleMinPrice = (value: string) => {
+        setMinValue(parseInt(value))
+    }
+
+    const handleMaxPrice = (value: string) => {
+        setMaxValue(parseInt(value))
+    }
+
     const handleChecks = () => {
-        const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        const checkboxGender = document.getElementsByName('gender') as NodeListOf<HTMLInputElement>;
+        const checkboxCategory = document.getElementsByName('category') as NodeListOf<HTMLInputElement>;
 
-        if (checkedCheckboxes.item.name == 'gender')
-            sendFilters.gender = Array.from(checkedCheckboxes).map(checkbox => checkbox.id);
-
-        if (checkedCheckboxes.item.name == 'category')
-            sendFilters.category = Array.from(checkedCheckboxes).map(checkbox => checkbox.id);
+        sendFilters.gender = Array.from(checkboxGender).map(checkbox => (checkbox.checked) ? checkbox.id : "");
+        sendFilters.category = Array.from(checkboxCategory).map(checkbox => (checkbox.checked) ? checkbox.id : "");
     }
 
     //#endregion
@@ -136,7 +142,6 @@ export default function Filters(){
                 <div className="flex">
                     <img className="mr-1" src={filter_svg} alt="" />
                     <p>Filtros</p>
-                    <p>{sendFilters.gender}</p>
                 </div>
                 <hr className="mt-2 w-full rounded-sm" />
 
@@ -148,17 +153,17 @@ export default function Filters(){
 
                     <ul className={genderCollapse ? "text-sm mt-1" : "hidden "}>
                         <li className="flex mb-1 cursor-pointer">
-                            <input type="checkbox" name="gender" id="M" onChange={handleChecks} className={checkboxStyle} />
+                            <input type="checkbox" name="gender" id="M" onClick={handleChecks} className={checkboxStyle} />
                             <p className="ml-2 content-center">{gender.M}</p>
                         </li>
 
                         <li className="flex mb-1 cursor-pointer">
-                            <input type="checkbox" name="gender" id="F" onChange={handleChecks} className={checkboxStyle} />
+                            <input type="checkbox" name="gender" id="F" onClick={handleChecks} className={checkboxStyle} />
                             <p className="ml-2 content-center">{gender.F}</p>
                         </li>
 
                         <li className="flex mb-1 cursor-pointer">
-                            <input type="checkbox" name="gender" id="U" onChange={handleChecks} className={checkboxStyle}/>
+                            <input type="checkbox" name="gender" id="U" onClick={handleChecks} className={checkboxStyle}/>
                             <p className="ml-2 content-center">{gender.U}</p>
                         </li>
                     </ul>
@@ -250,7 +255,7 @@ export default function Filters(){
                             <input type="number" className="ml-2 text-base text-dark-gray outline-none w-20"
                                 name="price" min={0} max={9999}
                                 value={Math.max(0, Math.min(9999, minValue))}
-                                onChange={(e) => { setMinValue(parseInt(e.target.value))}} />
+                                onChange={(e) => { handleMinPrice(e.target.value)}} />
                         </li>
 
                         <p className="content-center">Até</p>
@@ -259,7 +264,7 @@ export default function Filters(){
                             <input type="number" className="ml-2 text-base text-dark-gray outline-none w-18"
                                 name="price" min={0} max={9999}
                                 value={Math.max(0, Math.min(9999, maxValue))}
-                                onChange={(e) => { setMaxValue(parseInt(e.target.value))}} />
+                                onChange={(e) => { handleMaxPrice(e.target.value)}} />
                         </li>
 
                     </ul>
