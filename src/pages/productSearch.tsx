@@ -1,5 +1,4 @@
-import { useCallback } from "react";
-import type { ItemsInterface } from "../@types/products"
+import type { ItemsFilterInterface, ItemsInterface } from "../@types/products"
 import Filters from "../components/filters"
 
 import img_placeholder from '/images/item_img.svg'
@@ -46,10 +45,12 @@ export default function ProductSearch() {
     
     //#endregion
 
-    var itemsFiltered:  ItemsInterface[] = []
+    var itemsFiltered:  ItemsInterface[] = items.filter(
+        item => item.category == 'sweater'
+    )
 
     function filterCallback(filter: any) {
-        console.log(filter.gender)
+        console.log(filter)
     }
     
     return(
@@ -61,6 +62,7 @@ export default function ProductSearch() {
 
                 <div className="bg-bglight h-10 m-5">
                     {/* TODO: SISTEMA DE FILTROS DE ORDENAÇÃO E EXIBIR FILTROS USADOS*/}
+
                 </div>
 
                 <div className="grid grid-cols-5 overflow-y-scroll h-170 gap-5 m-5">

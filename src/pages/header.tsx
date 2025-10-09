@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import type { ItemsInterface, ItemsPriceInterface } from '../@types/products'
+import type { ItemsPriceInterface } from '../@types/products'
 import type { AccountInterface } from '../@types/customer'
 
 import ModalAccount from '../components/modalAccount'

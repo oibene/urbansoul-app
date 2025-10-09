@@ -9,9 +9,6 @@ interface ModalBagProps {
 export default function ModalBag(data: ModalBagProps) {
     if (!data.open) return null;
     
-    // TODO: INSERIR MODAL PARA INSERÇÃO DE CUPOM
-    const cupom = {cupom_name: "CUPOM10", cupom_value: 0.1}
- 
     // soma valores totais sem se preocupar com descontos
     const subtotal = data.itens.map(item => 
         item.price * item.quantity).reduce(
@@ -106,14 +103,6 @@ export default function ModalBag(data: ModalBagProps) {
                     <div className="flex justify-between">
                         <p>Subtotal</p>
                         <p>{formatMoney(subtotal)}</p>
-                    </div>
-                    <hr className="my-1"/>
-                    
-                    <div className="flex justify-between">
-                        <p>Cupons</p>
-                        <button className="cursor-pointer underline underline-offset-2">
-                            {cupom.cupom_name != "" ? cupom.cupom_name : "adicionar"}
-                        </button>
                     </div>
                     <hr className="my-1"/>
 
