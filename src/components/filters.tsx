@@ -3,7 +3,17 @@ import arrow_down from '/logos/arrow_down.svg'
 import arrow_up from '/logos/arrow_up.svg'
 
 import { useState } from 'react'
-import type { CategoryInterface } from '../@types/products';
+import type { CategoryInterface, ItemsFilterInterface } from '../@types/products';
+
+const sendFilters : ItemsFilterInterface = {
+        gender: [],
+        category: [],
+        size: [],
+
+        min_price: 0,
+        max_price: 0
+}
+
 
 export default function Filters(){
 
@@ -36,31 +46,46 @@ export default function Filters(){
 
     const handleBtnPP = () => {
         setBtnPP(!btnPP)
+        sendFilters.size.push((btnPP) ? "" : "PP");
     }
     const handleBtnP = () => {
         setBtnP(!btnP)
+        sendFilters.size.push((btnP) ? "" : "P");
     }
     const handleBtnM = () => {
         setBtnM(!btnM)
+        sendFilters.size.push((btnM) ? "" : "M");
     }
     const handleBtnG = () => {
         setBtnG(!btnG)
+        sendFilters.size.push((btnG) ? "" : "G");
     }
     const handleBtnGG = () => {
         setBtnGG(!btnGG)
+        sendFilters.size.push((btnGG) ? "" : "GG");
     }
     
-    const [minValue, setMinValue] = useState("");
-    const [maxValue, setMaxValue] = useState("");
+    const [minValue, setMinValue] = useState(0);
+    const [maxValue, setMaxValue] = useState(0);
+
+    sendFilters.min_price = Math.max(0, Math.min(9999, minValue))
+    sendFilters.max_price = Math.max(0, Math.min(9999, maxValue))
+    
+    const handleChecks = () => {
+        const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+
+        if (checkedCheckboxes.item.name == 'gender')
+            sendFilters.gender = Array.from(checkedCheckboxes).map(checkbox => checkbox.id);
+
+        if (checkedCheckboxes.item.name == 'category')
+            sendFilters.category = Array.from(checkedCheckboxes).map(checkbox => checkbox.id);
+    }
+
     //#endregion
 
-    {/* TODO: SISTEMA DE FILTROS LEVANDO DADOS PARA FORA DA TELA*/}
-    
-
     const checkboxStyle: string = ("appearance-none rounded-sm h-4 w-4 border border-gray" +
-                                    " checked:border-2 checked:outline-1 checked:border-light checked:bg-dark-gray");
-
-
+                                        " checked:border-2 checked:outline-1 checked:border-light checked:bg-dark-gray");
+    
     //#region VALUES
     const category: CategoryInterface[] = [
         {
@@ -111,6 +136,7 @@ export default function Filters(){
                 <div className="flex">
                     <img className="mr-1" src={filter_svg} alt="" />
                     <p>Filtros</p>
+                    <p>{sendFilters.gender}</p>
                 </div>
                 <hr className="mt-2 w-full rounded-sm" />
 
@@ -122,17 +148,17 @@ export default function Filters(){
 
                     <ul className={genderCollapse ? "text-sm mt-1" : "hidden "}>
                         <li className="flex mb-1 cursor-pointer">
-                            <input type="checkbox" name="gender" id="M" className={checkboxStyle} />
+                            <input type="checkbox" name="gender" id="M" onChange={handleChecks} className={checkboxStyle} />
                             <p className="ml-2 content-center">{gender.M}</p>
                         </li>
 
                         <li className="flex mb-1 cursor-pointer">
-                            <input type="checkbox" name="gender" id="F" className={checkboxStyle} />
+                            <input type="checkbox" name="gender" id="F" onChange={handleChecks} className={checkboxStyle} />
                             <p className="ml-2 content-center">{gender.F}</p>
                         </li>
 
                         <li className="flex mb-1 cursor-pointer">
-                            <input type="checkbox" name="gender" id="U" className={checkboxStyle}/>
+                            <input type="checkbox" name="gender" id="U" onChange={handleChecks} className={checkboxStyle}/>
                             <p className="ml-2 content-center">{gender.U}</p>
                         </li>
                     </ul>
@@ -149,7 +175,7 @@ export default function Filters(){
                     <ul className={categoryCollapse ? "text-sm mt-1" : "hidden "}>
                         {category.map((item:any, index:number) =>(
                             <li key={index} className="flex mb-1 cursor-pointer">
-                                <input type="checkbox" name="gender" id={item.type} className={checkboxStyle}/>
+                                <input type="checkbox" name="category" id={item.type} onChange={handleChecks} className={checkboxStyle}/>
                                 <p className="ml-2 content-center">{item.description}</p>
                             </li>
                         ))}
@@ -220,18 +246,20 @@ export default function Filters(){
 
                         <p className="content-center">De</p>
 
-                        <li className="outline-1 rounded-xs text-gray h-8 w-1/3 content-center">
-                            <input type="text"className="ml-2 text-base text-dark-gray outline-none"
-                                name="email" placeholder="0" size={8}
-                                onChange={(e) => { setMinValue(e.target.value)}} />
+                        <li className="outline-1 mr-4 rounded-xs text-gray h-8 w-1/3 content-center">
+                            <input type="number" className="ml-2 text-base text-dark-gray outline-none w-20"
+                                name="price" min={0} max={9999}
+                                value={Math.max(0, Math.min(9999, minValue))}
+                                onChange={(e) => { setMinValue(parseInt(e.target.value))}} />
                         </li>
 
                         <p className="content-center">Até</p>
 
                         <li className="outline-1 rounded-xs text-gray h-8 w-1/3 content-center">
-                            <input type="text"className="ml-2 text-base text-dark-gray outline-none"
-                                name="email" placeholder="10.000" size={8}
-                                onChange={(e) => { setMaxValue(e.target.value)}} />
+                            <input type="number" className="ml-2 text-base text-dark-gray outline-none w-18"
+                                name="price" min={0} max={9999}
+                                value={Math.max(0, Math.min(9999, maxValue))}
+                                onChange={(e) => { setMaxValue(parseInt(e.target.value))}} />
                         </li>
 
                     </ul>

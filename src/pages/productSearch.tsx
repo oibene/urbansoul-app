@@ -1,9 +1,10 @@
-import type { ItemsPriceInterface } from "../@types/products"
+import type { ItemsInterface } from "../@types/products"
 import Filters from "../components/filters"
 
 import img_placeholder from '/images/item_img.svg'
 
 export default function ProductSearch() {
+
 
     const formatMoney = (amount: number) => {
         return amount.toLocaleString('pt-BR',
@@ -17,11 +18,13 @@ export default function ProductSearch() {
     }
     
     //#region so much data
-    const items: ItemsPriceInterface[] = [
+    const items: ItemsInterface[] = [
         {
             id: 1,
             name: "Camisa Tech Feminina",
             size: "GG",
+            gender: "F",
+            category: "jeans",
             color: "Preto",
             quantity: 4,
             price: 890.50,
@@ -32,146 +35,8 @@ export default function ProductSearch() {
             id: 2,
             name: "Camisa Tech Feminina",
             size: "G",
-            color: "Preto",
-            quantity: 1,
-            price: 890.00,
-            has_descount: true,
-            descount_price: 712.00
-        },
-        {
-            id: 3,
-            name: "Camisa Tech Feminina",
-            size: "GG",
-            color: "Preto",
-            quantity: 4,
-            price: 890.50,
-            has_descount: false,
-            descount_price: 712.00
-        },
-        {
-            id: 4,
-            name: "Camisa Tech Feminina",
-            size: "G",
-            color: "Preto",
-            quantity: 1,
-            price: 890.00,
-            has_descount: true,
-            descount_price: 712.00
-        },
-        {
-            id: 5,
-            name: "Camisa Tech Feminina",
-            size: "GG",
-            color: "Preto",
-            quantity: 4,
-            price: 890.50,
-            has_descount: false,
-            descount_price: 712.00
-        },
-        {
-            id: 6,
-            name: "Camisa Tech Feminina",
-            size: "G",
-            color: "Preto",
-            quantity: 1,
-            price: 890.00,
-            has_descount: true,
-            descount_price: 712.00
-        },
-        {
-            id: 3,
-            name: "Camisa Tech Feminina",
-            size: "GG",
-            color: "Preto",
-            quantity: 4,
-            price: 890.50,
-            has_descount: false,
-            descount_price: 712.00
-        },
-        {
-            id: 4,
-            name: "Camisa Tech Feminina",
-            size: "G",
-            color: "Preto",
-            quantity: 1,
-            price: 890.00,
-            has_descount: true,
-            descount_price: 712.00
-        },
-        {
-            id: 5,
-            name: "Camisa Tech Feminina",
-            size: "GG",
-            color: "Preto",
-            quantity: 4,
-            price: 890.50,
-            has_descount: false,
-            descount_price: 712.00
-        },
-        {
-            id: 6,
-            name: "Camisa Tech Feminina",
-            size: "G",
-            color: "Preto",
-            quantity: 1,
-            price: 890.00,
-            has_descount: true,
-            descount_price: 712.00
-        },
-        {
-            id: 7,
-            name: "Camisa Tech Feminina",
-            size: "GG",
-            color: "Preto",
-            quantity: 4,
-            price: 890.50,
-            has_descount: false,
-            descount_price: 712.00
-        },
-        {
-            id: 8,
-            name: "Camisa Tech Feminina",
-            size: "G",
-            color: "Preto",
-            quantity: 1,
-            price: 890.00,
-            has_descount: true,
-            descount_price: 712.00
-        },
-        {
-            id: 9,
-            name: "Camisa Tech Feminina",
-            size: "GG",
-            color: "Preto",
-            quantity: 4,
-            price: 890.50,
-            has_descount: false,
-            descount_price: 712.00
-        },
-        {
-            id: 10,
-            name: "Camisa Tech Feminina",
-            size: "G",
-            color: "Preto",
-            quantity: 1,
-            price: 890.00,
-            has_descount: true,
-            descount_price: 712.00
-        },
-        {
-            id: 11,
-            name: "Camisa Tech Feminina",
-            size: "GG",
-            color: "Preto",
-            quantity: 4,
-            price: 890.50,
-            has_descount: false,
-            descount_price: 712.00
-        },
-        {
-            id: 12,
-            name: "Camisa Tech Feminina",
-            size: "G",
+            gender: "U",
+            category: "sweater",
             color: "Preto",
             quantity: 1,
             price: 890.00,
@@ -179,8 +44,13 @@ export default function ProductSearch() {
             descount_price: 712.00
         },
     ]
+    
     //#endregion
 
+    const itemsFiltered:  ItemsInterface[] = items.filter(
+        item => item.category == "sweater"
+    )
+    
     return(
         <div className="flex m-10">
 
@@ -194,7 +64,7 @@ export default function ProductSearch() {
 
                 <div className="grid grid-cols-5 overflow-y-scroll h-170 gap-5 m-5">
                     
-                    {items.map((item) => 
+                    {itemsFiltered.map((item) => 
                         <div className="w-60 h-80 bg-bglight rounded-md">
 
                             <div className="mx-4">

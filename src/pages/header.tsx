@@ -23,7 +23,9 @@ const bagItems: ItemsPriceInterface[] = [
         quantity: 4,
         price: 890.50,
         has_descount: false,
-        descount_price: 712.00
+        descount_price: 712.00,
+        gender: '',
+        category: ''
     },
     {
         id: 2,
@@ -33,7 +35,9 @@ const bagItems: ItemsPriceInterface[] = [
         quantity: 1,
         price: 890.00,
         has_descount: true,
-        descount_price: 712.00
+        descount_price: 712.00,
+        gender: '',
+        category: ''
     },
 ]
 

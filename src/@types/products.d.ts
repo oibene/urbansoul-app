@@ -1,16 +1,18 @@
 export interface ItemsInterface {
-    id?: number;
-    name?: string;
-    size?: string;
-    gender?: string;
-    color?: string;
-    quantity?: number;
-    price?: number;
-    has_descount?: boolean;
-    descount_price?: number;
+    id: number;
+    name: string;
+    size: string;
+    gender: string;
+    category: string;
+    color: string;
+    quantity: number;
+    price: number;
+    has_descount: boolean;
+    descount_price: number;
 }
 
-export interface ItemsPriceInterface extends ItemsInterface {id?: number;
+export interface ItemsPriceInterface extends ItemsInterface {
+    id: number;
     name: string;
     size: string;
     color: string;
@@ -18,6 +20,15 @@ export interface ItemsPriceInterface extends ItemsInterface {id?: number;
     price: number;
     has_descount: boolean;
     descount_price: number;
+}
+
+export interface ItemsFilterInterface {
+    size: string[];
+    gender: string[];
+    category: string[];
+
+    min_price: number;
+    max_price: number;
 }
 
 export interface CarouselInterface {
