@@ -13,8 +13,8 @@ interface Cupom {
 }
 
 export default function PaymentPage(){
-
     const [cupom, setCupom] = useState("")
+    const [radio, setRadio] = useState("")
 
     const bagItems: ItemsPriceInterface[] = [
         {
@@ -56,7 +56,7 @@ export default function PaymentPage(){
         },
     ]
 
-    const cupomValides: Cupom[]  = [
+    const cupoms: Cupom[]  = [
         {
             name: "CUPOM100",
             value:100
@@ -66,6 +66,16 @@ export default function PaymentPage(){
             value:50
         },
     ]
+
+    const validCupom : Cupom | undefined = cupoms.find(element => element.name == cupom)
+    const chosenRadio : Transport | undefined = transport.find(element => element.name == radio)
+
+    const handleRadio = () => {
+        const radiocheck = document.querySelector<HTMLInputElement>('input[name="frete"]:checked');
+
+        if (radiocheck != undefined)
+            setRadio(radiocheck?.id)
+    }
     
     const subtotal = bagItems.map(item =>
         (item.has_descount ? item.descount_price : item.price) * item.quantity ).reduce(
@@ -76,17 +86,15 @@ export default function PaymentPage(){
         item.quantity).reduce(
             (total: number, current: number) => total + current, 0
         );
+    
+    const total = subtotal -
+            ((validCupom != undefined) ? validCupom?.value : 0 ) -
+            ((chosenRadio  != undefined) ? chosenRadio.price : 0)
 
     const formatMoney = (amount: number) => {
         return amount.toLocaleString('pt-BR',
             {style: 'currency', currency:'BRL'})
     };
-
-    const handleChecks = () => {
-        const checkbox = document.getElementsByName('frete') as NodeListOf<HTMLInputElement>;
-        return Array.from(checkbox).map(checkbox => (checkbox.checked) ? checkbox.id : "");
-
-    }
 
     const checkboxStyle: string = ("appearance-none rounded-sm h-4 w-4 border border-gray" +
                                     " checked:border-2 checked:outline-1 checked:border-light checked:bg-dark-gray");
@@ -256,7 +264,7 @@ export default function PaymentPage(){
                                     <p className="mr-10 mb-5 w-20 text-xs">Cupom de Desconto</p>
 
                                     <div className="outline-1 rounded-xs text-gray h-8 w-50 content-center">
-                                        <input type="text" name="email" placeholder="Insira Cupom"
+                                        <input type="text" name="email" placeholder="Insira Cupom" onChange={(e) => { setCupom(e.target.value)}}
                                         className="mx-2 text-xs text-dark-gray w-45 outline-none"/>
                                     </div>
                                 </div>
@@ -270,6 +278,11 @@ export default function PaymentPage(){
                                     <p>{formatMoney(subtotal)}</p>
                                 </div>
 
+                                <div className={(validCupom != undefined) ? "flex mt-1 justify-between" : "hidden"}>
+                                    <p>{validCupom?.name}</p>
+                                    <p> - {(validCupom != undefined) ? formatMoney(validCupom?.value) : ""}</p>
+                                </div>
+
                                 <hr className="my-1"/>
 
                                 <div>
@@ -278,7 +291,7 @@ export default function PaymentPage(){
                                     <ul className="mt-2">
                                         {transport.map((item, index) => (
                                             <li key={index} className="flex mb-1">
-                                                <input type="checkbox" name="frete" className={checkboxStyle} />
+                                                <input type="radio" name="frete" id={item.name} onChange={handleRadio} className={checkboxStyle} />
 
                                                 <p className="ml-2 font-normal">
                                                     <span className="font-bold">{item.name}</span>
@@ -295,7 +308,7 @@ export default function PaymentPage(){
 
                                 <div className="flex justify-between">
                                     <p>Total</p>
-                                    <p>{formatMoney(subtotal)}</p>
+                                    <p>{formatMoney(total)}</p>
                                 </div>
 
                             </div>
