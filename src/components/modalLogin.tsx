@@ -7,7 +7,6 @@ export default function ModalLogin(){
     const [formEmail, setFormEmail] = useState("");
     const [formPassword, setFormPassword] = useState("");
 
-
     {/* TODO: REQUISIÇÃO PRO BANCO*/}
     const handleSubmit = () => {
         const data: LoginInterface = {
@@ -56,7 +55,7 @@ export default function ModalLogin(){
                         </div>
                     </div>
 
-                    <a href="#" className="text-base underline underline-offset-1">Não possui conta?</a>
+                    <a href="/account/create" className="text-base underline underline-offset-1">Não possui conta?</a>
                     
                     <div className="flex justify-center">
                         <button onSubmit={handleSubmit}

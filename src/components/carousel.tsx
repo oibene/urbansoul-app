@@ -37,7 +37,7 @@ export default function Carousel(data: CarouselProps) {
 
                 <div className="flex w-250 h-110 gap-10">
                     {visibleItems.map((item:any, index:number) => (
-                        <a key={index} href="#" className="transform hover:scale-105 m-2 ease-in-out">
+                        <a key={index} href={"/search/" + item.type} className="transform hover:scale-105 m-2 ease-in-out">
                             <img src={item.img_URL} alt="" />
                             <div className="font-noto text-dark-gray mt-2">
                                 <p className="font-bold text-base">{item.category}</p>

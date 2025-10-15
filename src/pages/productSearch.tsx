@@ -1,9 +1,12 @@
+import { useParams } from "react-router-dom";
 import type { ItemsFilterInterface, ItemsInterface } from "../@types/products"
 import Filters from "../components/filters"
 
 import img_placeholder from '/images/item_img.svg'
 
 export default function ProductSearch() {
+    const { product } = useParams();
+
     const formatMoney = (amount: number) => {
         return amount.toLocaleString('pt-BR',
             {style: 'currency', currency:'BRL'})

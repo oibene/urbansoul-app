@@ -41,13 +41,13 @@ const bagItems: ItemsPriceInterface[] = [
     },
 ]
 
-const accountInfo: AccountInterface = {}
-// {
-//     id: 1,
-//     first_name: "Icaro",
-//     last_name: "O",
-//     email: "icaro@email.com"
-// }
+const accountInfo: AccountInterface = 
+{
+    id: 1,
+    first_name: "Icaro",
+    last_name: "O",
+    email: "icaro@email.com"
+}
 
 export default function Header(){
     const [openAcc, setOpenAcc] = useState(false);
@@ -96,21 +96,21 @@ export default function Header(){
 
         <div className="flex mx-10 h-15 justify-between">
             <div className="content-center">
-                <a href= "#">
+                <a href= "/">
                     <img src={logo} alt="Urban Soul" />
                 </a>
             </div>
 
             <div className="grid grid-flow-col gap-4 content-center font-noto text-sm text-dark-gray">
-                <a href="#" className="hover:font-bold hover:underline underline-offset-4 decoration-red decoration-2" >Masculino</a> 
-                <a href="#" className="hover:font-bold hover:underline underline-offset-4 decoration-red decoration-2" >Feminino</a>
-                <a href="#" className="hover:font-bold hover:underline underline-offset-4 decoration-red decoration-2" >Kids</a>
+                <a href="/search/M" className="hover:font-bold hover:underline underline-offset-4 decoration-red decoration-2" >Masculino</a> 
+                <a href="/search/F" className="hover:font-bold hover:underline underline-offset-4 decoration-red decoration-2" >Feminino</a>
+                <a href="/search/U" className="hover:font-bold hover:underline underline-offset-4 decoration-red decoration-2" >Kids</a>
             </div>
 
             <div className="content-center">
             <div className="flex">
                 <div className="flex bg-light-gray w-40 h-5 rounded-2xl hover:border-1">
-                    <img className="ml-2" src={search_svg} alt=""/>
+                    <img className="ml-2 h-3.5 w-3.5 my-0.5" src={search_svg} alt=""/>
 
                     <input type="text" className="ml-2 text-gray font-bold font-noto text-xs content-center outline-none "
                             name="filter" placeholder="Buscar" size={12}
@@ -141,6 +141,7 @@ export default function Header(){
         <div className="flex justify-center">
             { openLogin && <ModalLogin></ModalLogin>}
         </div>
+
     </div>
     )
 }

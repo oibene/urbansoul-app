@@ -8,6 +8,7 @@ import Footer from "./pages/footer"
 import Index from './pages'
 import ProductSearch from './pages/productSearch';
 import PaymentPage from './pages/paymentPage';
+import Account from './pages/account';
 
 const router = createBrowserRouter(
   [
@@ -16,14 +17,17 @@ const router = createBrowserRouter(
       element: <Index></Index>,
     },
     {
-      path: "/search",
+      path: "/search/:product",
       element: <ProductSearch></ProductSearch>,
     },
     {
       path: "/pay",
       element: <PaymentPage></PaymentPage>
+    },
+    {
+      path: "/account/:variant",
+      element: <Account></Account>
     }
-    
   ]
 );
 

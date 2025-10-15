@@ -119,7 +119,7 @@ export default function ModalBag(data: ModalBagProps) {
                 </div>
 
                 <div className="flex justify-center mt-2">
-                    <a href="#" className="cursor-pointer text-base text-bglight bg-dark-gray font-bold p-2 rounded-2xl">
+                    <a href="/pay" className="cursor-pointer text-base text-bglight bg-dark-gray font-bold p-2 rounded-2xl">
                         Finalizar Compra
                     </a>
                 </div>

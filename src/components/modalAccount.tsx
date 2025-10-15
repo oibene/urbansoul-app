@@ -29,10 +29,12 @@ export default function ModalAccount(data:ModalAccProps){
                
                 <hr className="w-full h-0.5 rounded-sm"/>
 
-                <button className="m-3 cursor-pointer">
-                    ALTERAR CONTA
-                </button>
-
+                <div className="cursor-pointer m-3">
+                    <a href="/account/edit">
+                        ALTERAR CONTA
+                    </a>
+                </div>
+                
                 <hr className="w-full h-0.5 rounded-sm"/>
 
                 <button className="m-3 cursor-pointer">
