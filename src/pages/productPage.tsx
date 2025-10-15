@@ -1,10 +1,11 @@
 import { useParams } from 'react-router-dom';
-import type { ItemsInterface } from '../@types/products';
 import { useState } from 'react';
+import ProductComponents from '../components/productComponent';
+import type { ItemsInterface } from '../@types/products';
 
 const star = '/logos/star_rate.svg'
 
-interface colorInterface{
+interface ColorInterface{
     name: string
     hex: string
 }
@@ -23,7 +24,7 @@ const item: ItemsInterface =
     descount_price: 712.00
 }
 
-const colors = [
+const colors : ColorInterface[] = [
     {
         name: "Branco",
         hex: "bg-[#D9D9D9]"
@@ -45,6 +46,7 @@ const colors = [
 export default function ProductPage(){
     const { id } = useParams();
 
+    const [component, setComponent] = useState("DSC")
     const [color, setColor] = useState("Preto")
     const [size, setSize] = useState("")
     const [qtd, setQtd] = useState(0)
@@ -84,7 +86,7 @@ export default function ProductPage(){
     return(
         <div className="flex m-10 font-noto text-dark-gray text-sm">
 
-            <div className="w-120 h-145 bg-light">
+            <div className="w-100 bg-light">
                 <div className="m-5">
                     <p className="font-bold text-xl">{item.name.toUpperCase()}</p>
                 </div>
@@ -184,6 +186,42 @@ export default function ProductPage(){
                         <p className="text-sm font-bold mx-4 text-light"> Adicionar a Sacola </p>
                     </button>
 
+                </div>
+
+                <hr className="w-80 mt-5 mx-10 bg-dark-gray rounded-sm"/>
+
+                <div className="flex m-2 justify-center">
+                    <button onClick={e => setComponent('DSC')}>
+                        <p className={(component == 'DSC' ? "m-2 underline underline-offset-4 decoration-red decoration-2 cursor-pointer" :
+                                                            "m-2 hover:font-bold cursor-pointer")}>
+                            Descrição
+                        </p>
+                    </button>
+
+                    <button onClick={e => setComponent('CMP')}>
+                        <p className={(component == 'CMP' ? "m-2 underline underline-offset-4 decoration-red decoration-2 cursor-pointer" :
+                                                            "m-2 hover:font-bold cursor-pointer")}>
+                            Composição
+                        </p>
+                    </button>
+
+                    <button onClick={e => setComponent('FRT')}>
+                        <p className={(component == 'FRT' ? "m-2 underline underline-offset-4 decoration-red decoration-2 cursor-pointer" :
+                                                            "m-2 hover:font-bold cursor-pointer")}>
+                            Frete
+                        </p>
+                    </button>
+
+                    <button onClick={e => setComponent('COM')}>
+                        <p className={(component == 'COM' ? "m-2 underline underline-offset-4 decoration-red decoration-2 cursor-pointer" :
+                                                            "m-2 hover:font-bold cursor-pointer")}>
+                            Avaliações({comments_count})
+                        </p>
+                    </button>
+                </div>
+
+                <div className="flex m-4">
+                    <ProductComponents type={component} id={id}></ProductComponents>
                 </div>
 
             </div>

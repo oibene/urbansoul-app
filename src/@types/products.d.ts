@@ -4,6 +4,7 @@ export interface ItemsInterface {
     size: string;
     gender: string;
     category: string;
+    description?: string;
     color: string;
     quantity: number;
     price: number;
