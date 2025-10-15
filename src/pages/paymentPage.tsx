@@ -178,8 +178,6 @@ export default function PaymentPage(){
             <div className="flex content-center font-noto text-dark-gray text-sm">
 
                 <div className="m-5 w-1/3">
-                    <p className="mb-5 text-gray">home/carrinho/informações</p>
-
                     <div>
                         <p className="font-bold text-xl">Contato</p>
 

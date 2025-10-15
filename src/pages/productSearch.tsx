@@ -71,7 +71,7 @@ export default function ProductSearch() {
                 <div className="grid grid-cols-5 overflow-y-scroll h-170 gap-5 m-5">
                     
                     {itemsFiltered.map((item) => 
-                        <div key={item.id} className="w-60 h-80 bg-bglight rounded-md">
+                        <a href={"/product/" + item.id} key={item.id} className="w-60 h-80 bg-bglight rounded-md">
 
                             <div className="mx-4">
                                 
@@ -102,7 +102,7 @@ export default function ProductSearch() {
                             </div>
                             
 
-                        </div>
+                        </a>
                     )}
 
                 </div>

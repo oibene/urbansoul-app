@@ -9,24 +9,29 @@ import Index from './pages'
 import ProductSearch from './pages/productSearch';
 import PaymentPage from './pages/paymentPage';
 import Account from './pages/account';
+import ProductPage from './pages/productPage';
 
 const router = createBrowserRouter(
   [
     {
       path: "/",
-      element: <Index></Index>,
+      element: <Index />,
     },
     {
       path: "/search/:product",
-      element: <ProductSearch></ProductSearch>,
+      element: <ProductSearch />,
     },
     {
       path: "/pay",
-      element: <PaymentPage></PaymentPage>
+      element: <PaymentPage />
     },
     {
       path: "/account/:variant",
-      element: <Account></Account>
+      element: <Account />
+    },
+    {
+      path: "/product/:id",
+      element: <ProductPage />
     }
   ]
 );
